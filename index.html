@@ -4,12 +4,11 @@
   <meta charset="UTF-8">
   <title>QR Redirect</title>
   <script>
-    // Citim linkul din link.json
-    fetch('link.json')
+    fetch('link.json', { cache: "no-store" })
       .then(response => response.json())
       .then(data => {
-        // Redirecționăm imediat
-        window.location.href = data.currentLink;
+        const redirectUrl = `${data.currentLink}?ts=${Date.now()}`;
+        window.location.href = redirectUrl;
       })
       .catch(err => {
         console.error("Nu s-a putut citi linkul:", err);
@@ -18,6 +17,6 @@
   </script>
 </head>
 <body>
-  Redirecting...
+  <p>Redirecting...</p>
 </body>
 </html>
